@@ -2,14 +2,34 @@
   "name": "elysia-app",
   "version": "1.0.50",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "test": "bun test",
+    "dev": "NODE_ENV=development PORT=8000 bun run --hot src/app.ts",
+    "build": "bun build src/app.ts --outdir ./dist --target bun --minify",
+    "compile": "bun build dist/app.js --compile --outfile app",
+    "build:compile": "bun run build && bun run compile",
+    "start": "bun dist/app.js"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/html": "^0.8.0",
+    "@elysiajs/static": "^0.8.1",
+    "elysia": "latest",
+    "html-minifier-terser": "^7.2.0"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@biomejs/biome": "^1.5.3",
+    "@types/html-minifier-terser": "^7.0.2",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "bun-types": "latest",
+    "eslint": "^8.56.0",
+    "eslint-config-standard-with-typescript": "^43.0.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
+    "typescript": "^5.3.3"
   },
-  "module": "src/index.js"
+  "module": "src/app.ts",
+  "type": "module",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
 }
