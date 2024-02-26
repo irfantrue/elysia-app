@@ -19,18 +19,6 @@ bun run dev
 
 ## Feature
 
-<ul>
-  <li>
-    <input type="checkbox" id="rest_api" name="rest_api" checked disabled>
-    <label for="rest_api">REST API</label>
-  </li>
-  <li>
-    <input type="checkbox" id="websocket" name="websocket" disabled>
-    <label for="websocket">Websocket</label>
-  </li>
-  <li>
-    <input type="checkbox" id="webrtc" name="webrtc" disabled>
-    <label for="webrtc">WebRTC</label>
-  </li>
-</ul>
-
+- [x] REST API
+- [ ] Websocket
+- [ ] WebRTC
