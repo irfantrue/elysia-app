@@ -22,6 +22,11 @@ export class IndexRoutes {
 
             return response
         })
+        this.#router.get('/websocket', async () => {
+            const response = await Bun.file('src/views/ws.html').text()
+
+            return response
+        })
 
         return this.#router
     }
