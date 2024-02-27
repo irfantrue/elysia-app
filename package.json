@@ -13,11 +13,16 @@
     "@elysiajs/html": "^0.8.0",
     "@elysiajs/static": "^0.8.1",
     "elysia": "latest",
-    "html-minifier-terser": "^7.2.0"
+    "html-minifier-terser": "^7.2.0",
+    "luxon": "^3.4.4",
+    "mongoose": "^8.2.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.5.3",
     "@types/html-minifier-terser": "^7.0.2",
+    "@types/luxon": "^3.4.2",
+    "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "bun-types": "latest",
     "eslint": "^8.56.0",

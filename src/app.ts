@@ -5,7 +5,7 @@ import { CompressionMiddleware } from 'middlewares/compression'
 import { ErrorMiddleware } from 'middlewares/errors'
 import { LoggingMiddleware } from 'middlewares/logging'
 import { IndexRoutes } from 'routes'
-import { Websocket } from 'websocket'
+import { WebSocket } from 'websocket'
 
 const app = new Elysia()
 
@@ -15,7 +15,7 @@ app.use(new ErrorMiddleware().handle())
 app.use(new CompressionMiddleware().handle())
 app.use(new LoggingMiddleware().handle())
 app.use(new IndexRoutes().handle())
-app.use(new Websocket().handle())
+app.use(new WebSocket().handle())
 
 app.listen(process.env['PORT'] ?? 8000)
 console.log(

@@ -1,9 +1,10 @@
 import { Elysia } from 'elysia'
+import { ChatRoomModel } from 'models/chat-room'
 
-export class Websocket {
+export class WebSocket {
     public handle(): Elysia {
         const app = new Elysia({
-            name: 'Websocket',
+            name: 'WebSocket',
             websocket: {
                 idleTimeout: 10, // 2min
                 maxPayloadLength: 16 * 1024 * 1024, // 16mb
@@ -20,6 +21,20 @@ export class Websocket {
                 console.log(ws.id, message)
                 ws.publish('chat', message)
                 ws.send(message)
+
+                // const chatRoom = new ChatRoomModel({
+                //     type: 'room',
+                //     room_id: '',
+                //     max_members: 10,
+                //     participants: [],
+                //     messages: [],
+                // })
+
+                // await chatRoom.save()
+
+                const chatRoom = await ChatRoomModel.isRoomExists('')
+
+                await chatRoom.addMember(chatRoom.room_id, [])
             },
 
             close: (ws, code, message) => {
