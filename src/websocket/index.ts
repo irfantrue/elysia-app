@@ -1,5 +1,5 @@
 import { Elysia } from 'elysia'
-import { ChatRoomModel } from 'models/chat-room'
+import { ChatRoomModel } from 'models/chat/chat-model'
 
 export class WebSocket {
     public handle(): Elysia {

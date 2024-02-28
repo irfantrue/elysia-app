@@ -1,5 +1,6 @@
 import { html } from '@elysiajs/html'
 import staticPlugin from '@elysiajs/static'
+import { Database } from 'config/database'
 import { Elysia } from 'elysia'
 import { CompressionMiddleware } from 'middlewares/compression'
 import { ErrorMiddleware } from 'middlewares/errors'
@@ -8,6 +9,8 @@ import { IndexRoutes } from 'routes'
 import { WebSocket } from 'websocket'
 
 const app = new Elysia()
+
+// Database.connect()
 
 app.use(staticPlugin())
 app.use(html())

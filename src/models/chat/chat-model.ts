@@ -1,41 +1,8 @@
-import mongoose, { type HydratedDocument, type ObjectId } from 'mongoose'
+import mongoose from 'mongoose'
 import { v4 as uuidv4 } from 'uuid'
 import { DateTime } from 'luxon'
 import { APIError } from 'middlewares/errors'
-
-interface IMessage extends mongoose.Document {
-    sender: ObjectId
-    content: {
-        text: string | null
-        source: string | null
-        ext: string | null
-    }
-    read_timestamp: Array<{
-        user: mongoose.ObjectId
-        timestamp: mongoose.Date
-    }>
-    created_at: mongoose.Date
-    updated_at: mongoose.Date
-}
-
-interface IChatRoomSchema extends mongoose.Document {
-    type: 'room' | 'personal'
-    room_id: string
-    max_members: number
-    participants: mongoose.ObjectId[]
-    messages: IMessage[]
-    created_at: mongoose.Date
-    updated_at: mongoose.Date
-}
-
-interface IChatRoomMethods {
-    addMember: (room_id: string, user: ObjectId[]) => Promise<void>
-}
-
-interface IChatRoomModel extends mongoose.Model<
-IChatRoomSchema, Record<string, unknown>, IChatRoomMethods> {
-    isRoomExists: (room_id: string) => Promise<HydratedDocument<IChatRoomSchema, IChatRoomMethods>>
-}
+import type { IChatRoomMethods, IChatRoomModel, IChatRoomSchema } from './chat-type'
 
 const ChatRoomSchema = new mongoose.Schema<IChatRoomSchema, IChatRoomModel, IChatRoomMethods>({
     room_id: { type: String, required: true, default: uuidv4() },

@@ -49,6 +49,16 @@ export class ErrorMiddleware implements IErrorMiddleware {
                     }
                 }
 
+                if (ctx.code === 'VALIDATION') {
+                    ctx.set.status = 422
+
+                    return {
+                        status: false,
+                        message: 'VALIDATION',
+                        error: JSON.parse(ctx.error.message),
+                    }
+                }
+
                 console.error(ctx.error.stack)
                 ctx.set.status = 500
 
