@@ -1,15 +1,20 @@
 import { Elysia } from 'elysia'
+import { AuthMiddleware } from 'middlewares/auth'
+import type { DecoratorBaseCustomAuth } from 'middlewares/auth/index.type'
 import { ChatRoomModel } from 'models/chat/chat-model'
 
 export class WebSocket {
     public handle(): Elysia {
-        const app = new Elysia({
+        const app = new Elysia<'', DecoratorBaseCustomAuth>({
             name: 'WebSocket',
             websocket: {
                 idleTimeout: 10, // 2min
                 maxPayloadLength: 16 * 1024 * 1024, // 16mb
             },
         })
+
+        // Middleware
+        app.use(new AuthMiddleware().handle())
 
         app.ws('/ws', {
             open: (ws) => {
@@ -18,8 +23,7 @@ export class WebSocket {
             },
 
             message: async (ws, message) => {
-                console.log(ws.id, message)
-                ws.publish('chat', message)
+                console.log(ws.data.user_info)
                 ws.send(message)
 
                 // const chatRoom = new ChatRoomModel({
@@ -32,9 +36,9 @@ export class WebSocket {
 
                 // await chatRoom.save()
 
-                const chatRoom = await ChatRoomModel.isRoomExists('')
+                // const chatRoom = await ChatRoomModel.isRoomExists('')
 
-                await chatRoom.addMember(chatRoom.room_id, [])
+            // await chatRoom.addMember(chatRoom.room_id, [])
             },
 
             close: (ws, code, message) => {
